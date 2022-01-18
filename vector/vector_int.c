@@ -26,8 +26,6 @@ void resize(vector* const this, int new_size) {
 void insert(vector* const this, int value, int index) {
     if (index >= this->capacity) {
         int capacity;
-        // for (capacity = this->capacity ; capacity <= index ; capacity *= 2)
-        //     ;
         while (capacity <= index)
             capacity *= 2;
         
@@ -67,13 +65,4 @@ int pop_back(vector* const this) {
     else
         return -1;
         
-}
-
-int main() {
-    vector hoge;
-    construct(&hoge, 3);
-
-    insert(&hoge, 7, 2);
-    printf("%d\n", hoge.vec[2]);
-    printf("%d\n", hoge.capacity);
 }
