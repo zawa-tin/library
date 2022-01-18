@@ -51,8 +51,3 @@ int popback(vector* const this) {
         return -1;
         
 }
-
-
-int main() {
-
-}
