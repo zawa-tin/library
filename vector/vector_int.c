@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 typedef struct {
-    int * vec;
+    int *vec;
     int size;
 }vector;
 
@@ -17,19 +17,19 @@ void resize(vector* const this, int new_size) {
     this->size = new_size;
 }
 
-void insert(vector* const this, int value, int place) {
-    if (place >= this->size)
-        resize(this, place + 1);
-    this->vec[place] = value;
+void insert(vector* const this, int value, int index) {
+    if (index >= this->size)
+        resize(this, index + 1);
+    this->vec[index] = value;
 }
 
-int erase(vector* const this, int place) {
-    if (place >= this->size)
+int erase(vector* const this, int index) {
+    if (index >= this->size)
         return 0;
     
-    int erased_value = this->vec[place];
+    int erased_value = this->vec[index];
     
-    for (int i = place ; i < this->size - 1 ; i++)
+    for (int i = index ; i < this->size - 1 ; i++)
         this->vec[i] = this->vec[i + 1];
     
     resize(this, this->size - 1);
@@ -37,13 +37,13 @@ int erase(vector* const this, int place) {
     return erased_value;
 }
 
-void pushback(vector* const this, int value) {
+void push_back(vector* const this, int value) {
     resize(this, this->size + 1);
 
     insert(this, value, this->size - 1);
 }
 
-int popback(vector* const this) {
+int pop_back(vector* const this) {
     int poped_value;
     if (this->size > 0)
         poped_value = erase(this, this->size - 1);
