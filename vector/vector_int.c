@@ -65,4 +65,5 @@ int pop_back(vector* const this) {
     else
         return -1;
         
+    return poped_value;
 }
