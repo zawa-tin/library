@@ -4,11 +4,17 @@
 typedef struct {
     int *vec;
     int size;
+    int capacity;
 }vector;
 
 void construct(vector* const this, int n) {
-    this->vec = (int *)malloc(sizeof(int) * n);
+    int capacity = 1;
+    while (capacity <= n)
+        capacity *= 2;
+    
+    this->capacity = capacity;
     this->size = n;
+    this->vec = (int *)malloc(sizeof(int) * capacity);
 }
 
 void resize(vector* const this, int new_size) {
@@ -18,8 +24,21 @@ void resize(vector* const this, int new_size) {
 }
 
 void insert(vector* const this, int value, int index) {
-    if (index >= this->size)
-        resize(this, index + 1);
+    if (index >= this->capacity) {
+        int capacity;
+        // for (capacity = this->capacity ; capacity <= index ; capacity *= 2)
+        //     ;
+        while (capacity <= index)
+            capacity *= 2;
+        
+        resize(this, capacity);
+        this->capacity = capacity;
+    }
+
+    if (index >= this->size) {
+        this->size = index + 1;
+    }
+
     this->vec[index] = value;
 }
 
@@ -38,8 +57,6 @@ int erase(vector* const this, int index) {
 }
 
 void push_back(vector* const this, int value) {
-    resize(this, this->size + 1);
-
     insert(this, value, this->size - 1);
 }
 
@@ -50,4 +67,13 @@ int pop_back(vector* const this) {
     else
         return -1;
         
+}
+
+int main() {
+    vector hoge;
+    construct(&hoge, 3);
+
+    insert(&hoge, 7, 2);
+    printf("%d\n", hoge.vec[2]);
+    printf("%d\n", hoge.capacity);
 }
