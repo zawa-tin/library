@@ -43,7 +43,6 @@ void insert(vector* const this, int value, int index) {
     this->vec[index] = value;
 }
 
-// 要修正
 int erase(vector* const this, int index) {
     if (index >= this->size)
         return 0;
@@ -80,10 +79,10 @@ int pop_back(vector* const this) {
 }
 
 // for debug
-// void print_vector(vector* const this) {
-//     for (int i = 0 ; i < this->size ; i++)
-//         printf(" %d", this->vec[i]);
-//     printf("\n");
-//     printf("size is %d\n", this->size);
-//     printf("capacity is %d\n", this->capacity);
-// }
+void print_vector(vector* const this) {
+    for (int i = 0 ; i < this->size ; i++)
+        printf(" %d", this->vec[i]);
+    printf("\n");
+    printf("size is %d\n", this->size);
+    printf("capacity is %d\n", this->capacity);
+}
