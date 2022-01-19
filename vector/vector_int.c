@@ -21,6 +21,11 @@ vector * construct_vector(int n) {
     return this;
 }
 
+destruct_vector(vector* const this) {
+    free(this->vec);
+    free(this);
+}
+
 void resize(vector* const this, int new_size) {
     int *new = (int *)realloc(this->vec, sizeof(int) * new_size);
     this->vec = new;
