@@ -105,16 +105,16 @@
     }
 
 // for debug
+// You have to change format identifier if you use this function.
 #define DEFINE_VECTOR_PRINT(T) \
     void VECTOR_METHOD(T, print)(VECTOR_REF(T) const this) { \
         for (int i = 0 ; i < this->size ; i++) \
-            printf(" %d", this->vec[i]); \
+            printf(" %f", this->vec[i]); \
         printf("\n"); \
         printf("size is %d\n", this->size); \
         printf("capacity is %d\n", this->capacity); \
     }
 
-// eraseとresizeに問題有り
 #define DEFINE_VECTOR_METHODS(T) \
     DEFINE_VECTOR_CONSTRUCTOR(T) \
     DEFINE_VECTOR_DESTRUCTOR(T) \
@@ -125,18 +125,6 @@
     DEFINE_VECTOR_POPBACK(T) \
     DEFINE_VECTOR_PRINT(T)
 
-DEFINE_VECTOR(int)
-DEFINE_VECTOR_METHODS(int)
-
 int main() {
-    VECTOR_REF(int) v_int = VECTOR_METHOD(int, constructor)(4);
-    VECTOR_METHOD(int, insert)(v_int, 2, 2);
-    VECTOR_METHOD(int, print)(v_int);
-    VECTOR_METHOD(int, push_back)(v_int, 100);
-    VECTOR_METHOD(int, print)(v_int);
-    int retval = VECTOR_METHOD(int, pop_back)(v_int);
-    VECTOR_METHOD(int, print)(v_int);
-    printf("retval is %d\n", retval);
-    VECTOR_METHOD(int, erase)(v_int, 2);
-    VECTOR_METHOD(int, print)(v_int);
+
 }
