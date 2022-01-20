@@ -21,7 +21,7 @@ vector * construct_vector(int n) {
     return this;
 }
 
-destruct_vector(vector* const this) {
+void destruct_vector(vector* const this) {
     free(this->vec);
     free(this);
 }
