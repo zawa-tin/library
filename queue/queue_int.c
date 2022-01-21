@@ -64,7 +64,7 @@ int queue_dequeue(queue self) {
     }
     else
         // queue underflow
-        return -1;
+        ;
 }
 
 // for debug
