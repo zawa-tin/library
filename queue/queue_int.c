@@ -75,21 +75,3 @@ void queue_print(queue self) {
     printf("\n");
     printf("head = %d(value is %d), tail = %d\n", self->head, self->array[self->head], self->tail);
 }
-
-int main() {
-    queue sample;
-    sample = queue_constructor(sample, 6);
-    
-    queue_enqueue(sample, 3);
-    queue_enqueue(sample, 88);
-    queue_enqueue(sample, 14);
-    queue_print(sample);
-    int a = queue_dequeue(sample);
-    printf("%d is dequeued\n", a);
-    queue_print(sample);
-    a = queue_dequeue(sample);
-    printf("%d is dequeued\n", a);
-    queue_print(sample);
-    queue_enqueue(sample, 109);
-    queue_print(sample);
-}
