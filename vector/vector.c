@@ -126,5 +126,4 @@
     DEFINE_VECTOR_PRINT(T)
 
 int main() {
-
 }
