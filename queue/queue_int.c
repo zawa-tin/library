@@ -67,6 +67,14 @@ int queue_dequeue(queue self) {
         ;
 }
 
+int queue_front(queue self) {
+    if (!is_queue_empty(self))
+        return self->array[self->head];
+    else
+        // queue underflow
+        ;
+}
+
 // for debug
 void queue_print(queue self) {
     printf("size = %d\n", self->size);
