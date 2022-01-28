@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-struct deque_entity {
+struct deque_entity
+{
     int front;
     int back;
     int size;
@@ -9,7 +11,8 @@ struct deque_entity {
 };
 typedef struct deque_entity *deque;
 
-deque deque_constructor(deque self, int size) {
+deque deque_constructor(deque self, int size)
+{
     self = (deque)malloc(sizeof(struct deque_entity));
     self->array = (int *)malloc(sizeof(int) * (size + 1));
     self->front = (size + 1) / 2;
@@ -19,28 +22,33 @@ deque deque_constructor(deque self, int size) {
     return self;
 }
 
-deque deque_destructor(deque self) {
+deque deque_destructor(deque self)
+{
     self->front = self->back = self->size = 0;
     free(self->array);
     free(self);
 }
 
-int is_deque_empty(deque self) {
+bool is_deque_empty(deque self)
+{
     if (self->front + 1 == self->back || (self->back == 0 && self->front == self->size))
-        return 1;
+        return true;
     else
-        return 0;
+        return false;
 }
 
-int is_deque_full(deque self) {
+bool is_deque_full(deque self)
+{
     if (self->front == self->back)
-        return 1;
+        return true;
     else
-        return 0;
+        return false;
 }
 
-void deque_push_front(deque self, int value) {
-    if (!is_deque_full(self)) {
+void deque_push_front(deque self, int value)
+{
+    if (!is_deque_full(self))
+    {
         self->array[self->front] = value;
         if (self->front == 0)
             self->front = self->size;
@@ -52,8 +60,10 @@ void deque_push_front(deque self, int value) {
         ;
 }
 
-void deque_push_back(deque self, int value) {
-    if (!is_deque_full(self)) {
+void deque_push_back(deque self, int value)
+{
+    if (!is_deque_full(self))
+    {
         self->array[self->back] = value;
         if (self->back == self->size)
             self->back = 0;
@@ -65,13 +75,15 @@ void deque_push_back(deque self, int value) {
         ;
 }
 
-int deque_pop_front(deque self) {
-    if (!is_deque_empty(self)) {
+int deque_pop_front(deque self)
+{
+    if (!is_deque_empty(self))
+    {
         if (self->front == self->size)
             self->front = 0;
         else
             self->front++;
-        
+
         return self->array[self->front];
     }
     else
@@ -79,13 +91,15 @@ int deque_pop_front(deque self) {
         ;
 }
 
-int deque_pop_back(deque self) {
-    if (!is_deque_empty(self)) {
+int deque_pop_back(deque self)
+{
+    if (!is_deque_empty(self))
+    {
         if (self->back == 0)
             self->back = self->size;
         else
             self->back--;
-        
+
         return self->array[self->back];
     }
     else
@@ -93,9 +107,10 @@ int deque_pop_back(deque self) {
         ;
 }
 
-void deque_print(deque self) {
+void deque_print(deque self)
+{
     printf("size is %d\n", self->size);
-    for (int i = 0 ; i <= self->size ; i++)
+    for (int i = 0; i <= self->size; i++)
         printf(" %d", self->array[i]);
     printf("\n");
     printf("front is %d,  back is %d\n", self->front, self->back);
