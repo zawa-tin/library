@@ -103,7 +103,7 @@ int deque_pop_back(deque self)
         return self->array[self->back];
     }
     else
-        // deque underflow
+        // deque underflowd
         ;
 }
 
