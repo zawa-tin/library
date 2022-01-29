@@ -76,14 +76,6 @@ int stack_top(stack self)
         ;
 }
 
-int stack_top(stack self) {
-    if (!is_stack_empty(self))
-        return self->array[self->top];
-    else
-        // underflow
-        ;
-}
-
 // for debug
 void stack_print(stack self)
 {

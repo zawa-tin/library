@@ -23,7 +23,8 @@
 
 #define DEFINE_VECTOR_CONSTRUCTOR(T)                                       \
     VECTOR_REF(T)                                                          \
-    VECTOR_METHOD(T, constructor)(int n)                                   \
+    VECTOR_METHOD(T, constructor)                                          \
+    (int n)                                                                \
     {                                                                      \
                                                                            \
         VECTOR_REF(T)                                                      \
@@ -141,7 +142,3 @@
     DEFINE_VECTOR_PUSH_BACK(T)   \
     DEFINE_VECTOR_POPBACK(T)     \
     DEFINE_VECTOR_PRINT(T)
-
-int main()
-{
-}
