@@ -142,7 +142,3 @@
     DEFINE_VECTOR_PUSH_BACK(T)   \
     DEFINE_VECTOR_POPBACK(T)     \
     DEFINE_VECTOR_PRINT(T)
-
-int main()
-{
-}
