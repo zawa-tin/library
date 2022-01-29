@@ -1,94 +1,95 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct
+struct vector_entity
 {
     int *vec;
     int size;
     int capacity;
-} vector;
+};
+typedef struct vector_entity *vector;
 
-vector *construct_vector(int n)
+vector construct_vector(vector self, int n)
 {
-    vector *const this = (vector *)malloc(sizeof(vector));
+    self = (vector *)malloc(sizeof(vector));
 
     int capacity = 1;
     while (capacity <= n)
         capacity *= 2;
 
-    this->capacity = capacity;
-    this->size = n;
-    this->vec = (int *)malloc(sizeof(int) * capacity);
+    self->capacity = capacity;
+    self->size = n;
+    self->vec = (int *)malloc(sizeof(int) * capacity);
 
-    return this;
+    return self;
 }
 
-void destruct_vector(vector *const this)
+void destruct_vector(vector const self)
 {
-    free(this->vec);
-    free(this);
+    free(self->vec);
+    free(self);
 }
 
-void resize(vector *const this, int new_size)
+void resize(vector const self, int new_size)
 {
-    int *new = (int *)realloc(this->vec, sizeof(int) * new_size);
-    this->vec = new;
-    this->capacity = new_size;
+    int *new = (int *)realloc(self->vec, sizeof(int) * new_size);
+    self->vec = new;
+    self->capacity = new_size;
 }
 
-void insert(vector *const this, int value, int index)
+void insert(vector self, int value, int index)
 {
-    if (index >= this->capacity)
+    if (index >= self->capacity)
     {
-        int capacity = this->capacity;
+        int capacity = self->capacity;
         while (capacity <= index)
             capacity *= 2;
 
-        resize(this, capacity);
+        resize(self, capacity);
     }
 
-    if (index >= this->size)
+    if (index >= self->size)
     {
-        this->size = index + 1;
+        self->size = index + 1;
     }
 
-    this->vec[index] = value;
+    self->vec[index] = value;
 }
 
-int erase(vector *const this, int index)
+int erase(vector const self, int index)
 {
-    if (index >= this->size)
+    if (index >= self->size)
         return 0;
 
-    int erased_value = this->vec[index];
+    int erased_value = self->vec[index];
 
-    if (index >= this->size / 2)
+    if (index >= self->size / 2)
     {
-        for (int i = index; i < this->size - 1; i++)
-            this->vec[i] = this->vec[i + 1];
-        this->size--;
+        for (int i = index; i < self->size - 1; i++)
+            self->vec[i] = self->vec[i + 1];
+        self->size--;
     }
     else
     {
         for (int i = index; i > 0; i--)
-            this->vec[i] = this->vec[i - 1];
-        this->vec = &this->vec[1];
-        this->size--;
+            self->vec[i] = self->vec[i - 1];
+        self->vec = &self->vec[1];
+        self->size--;
     }
 
     return erased_value;
 }
 
-void push_back(vector *const this, int value)
+void push_back(vector const self, int value)
 {
-    insert(this, value, this->size);
+    insert(self, value, self->size);
 }
 
-int pop_back(vector *const this)
+int pop_back(vector const self)
 {
     int poped_value;
-    if (this->size > 0)
-        poped_value = erase(this, this->size - 1);
+    if (self->size > 0)
+        poped_value = erase(self, self->size - 1);
     else
         return -1;
 
@@ -96,11 +97,11 @@ int pop_back(vector *const this)
 }
 
 // for debug
-void print_vector(vector *const this)
+void print_vector(vector const self)
 {
-    for (int i = 0; i < this->size; i++)
-        printf(" %d", this->vec[i]);
+    for (int i = 0; i < self->size; i++)
+        printf(" %d", self->vec[i]);
     printf("\n");
-    printf("size is %d\n", this->size);
-    printf("capacity is %d\n", this->capacity);
+    printf("size is %d\n", self->size);
+    printf("capacity is %d\n", self->capacity);
 }
