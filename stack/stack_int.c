@@ -4,9 +4,9 @@
 
 struct stack_entity
 {
+    int *array;
     int size;
     int top;
-    int *array;
 };
 typedef struct stack_entity *stack;
 
@@ -80,9 +80,7 @@ int stack_top(stack self)
 void stack_print(stack self)
 {
     for (int i = 0; i < self->size + 1; i++)
-    {
         printf(" %d", self->array[i]);
-    }
     printf("\n");
     printf("top is %d (value = %d)\n", self->top, self->array[self->top]);
 }
