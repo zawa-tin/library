@@ -103,7 +103,11 @@ int deque_pop_back(deque self)
         return self->array[self->back];
     }
     else
+<<<<<<< HEAD
         // deque underflow
+=======
+        // deque underflowd
+>>>>>>> 43226de5cf36477b696c497118d42473a8c97f8a
         ;
 }
 
