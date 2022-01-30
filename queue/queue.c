@@ -23,7 +23,7 @@
 #define QUEUE_METHOD(T, f) \
     CONCAT(QUEUE_TYPE(T), f)
 
-#define DEFINE_QUEUE_CONSTRUCOTOR(T)                               \
+#define DEFINE_QUEUE_CONSTRUCTOR(T)                                \
     QUEUE_REF(T)                                                   \
     QUEUE_METHOD(T, constructor)                                   \
     (QUEUE_REF(T) self, int size)                                  \
@@ -32,7 +32,7 @@
         self->size = size;                                         \
         self->head = 0;                                            \
         self->tail = 0;                                            \
-        self->array = (T *)mallod(sizeof(T) * (size + 1));         \
+        self->array = (T *)malloc(sizeof(T) * (size + 1));         \
                                                                    \
         return self;                                               \
     }
@@ -100,7 +100,7 @@
 #define DEFINE_QUEUE_FRONT(T)                   \
     T QUEUE_METHOD(T, front)(QUEUE_REF(T) self) \
     {                                           \
-        if (!QUEUE_METHOD(T, is_emtpy)(self))   \
+        if (!QUEUE_METHOD(T, is_empty)(self))   \
             return self->array[self->head];     \
         else                                    \
             ;                                   \
@@ -108,21 +108,21 @@
 
 // for debug
 // You have to change format identifier if you use this function.
-#define DEFINE_QUEUE_PRINT(T)                                                                           \
-    void QUEUE_METHOD(T, print)(QUEUE_REF(T) self)                                                      \
-    {                                                                                                   \
-        for (int i = 0; i < self->size + 1; i++)                                                        \
-            printf(" %d", self->array[i]);                                                              \
-        printf("\n");                                                                                   \
-        printf("head = %d(value is %d), tail = %d\n", self->head, self->array[self->head], self->tail); \
+#define DEFINE_QUEUE_PRINT(T)                                                                            \
+    void QUEUE_METHOD(T, print)(QUEUE_REF(T) self)                                                       \
+    {                                                                                                    \
+        for (int i = 0; i < self->size + 1; i++)                                                         \
+            printf(" %lf", self->array[i]);                                                              \
+        printf("\n");                                                                                    \
+        printf("head = %d(value is %lf), tail = %d\n", self->head, self->array[self->head], self->tail); \
     }
 
-#define DEFINE_QUEUE_METHOD(T)   \
-    DEFINE_QUEUE_CONSTRUCOTOR(T) \
-    DEFINE_QUEUE_DEQUEUE(T)      \
-    DEFINE_IS_QUEUE_EMPTY(T)     \
-    DEFINE_IS_QUEUE_FULL(T)      \
-    DEFINE_QUEUE_ENQUEUE(T)      \
-    DEFINE_QUEUE_DEQUEUE(T)      \
-    DEFINE_QUEUE_FRONT(T)        \
+#define DEFINE_QUEUE_METHOD(T)  \
+    DEFINE_QUEUE_CONSTRUCTOR(T) \
+    DEFINE_QUEUE_DESTRUCTOR(T)  \
+    DEFINE_IS_QUEUE_EMPTY(T)    \
+    DEFINE_IS_QUEUE_FULL(T)     \
+    DEFINE_QUEUE_ENQUEUE(T)     \
+    DEFINE_QUEUE_DEQUEUE(T)     \
+    DEFINE_QUEUE_FRONT(T)       \
     DEFINE_QUEUE_PRINT(T)
