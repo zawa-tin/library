@@ -24,7 +24,9 @@ queue queue_constructor(queue self, int size)
 
 void queue_destructor(queue self)
 {
-    self->head = self->tail = self->size = 0;
+    self->head = 0;
+    self->tail = 0;
+    self->size = 0;
     free(self->array);
     free(self);
 }
