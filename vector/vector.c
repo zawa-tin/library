@@ -120,13 +120,22 @@
         return poped_value;                                       \
     }
 
+#define DEFINE_VECTOR_CLEAR(T)                               \
+    void VECTOR_METHOD(T, clear)(VECTOR_REF(T) self)         \
+    {                                                        \
+        free(self->vec);                                     \
+        self->size = 0;                                      \
+        self->capacity = 1;                                  \
+        self->vec = (T *)malloc(sizeof(T) * self->capacity); \
+    }
+
 // for debug
 // You have to change format identifier if you use this function.
 #define DEFINE_VECTOR_PRINT(T)                             \
     void VECTOR_METHOD(T, print)(VECTOR_REF(T) const self) \
     {                                                      \
         for (int i = 0; i < self->size; i++)               \
-            printf(" %f", self->vec[i]);                   \
+            printf(" %d", self->vec[i]);                   \
         printf("\n");                                      \
         printf("size is %d\n", self->size);                \
         printf("capacity is %d\n", self->capacity);        \
@@ -140,4 +149,5 @@
     DEFINE_VECTOR_ERASE(T)       \
     DEFINE_VECTOR_PUSH_BACK(T)   \
     DEFINE_VECTOR_POPBACK(T)     \
+    DEFINE_VECTOR_CLEAR(T)       \
     DEFINE_VECTOR_PRINT(T)
