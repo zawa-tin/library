@@ -22,7 +22,7 @@ queue queue_constructor(queue self, int size)
     return self;
 }
 
-queue queue_destructor(queue self)
+void queue_destructor(queue self)
 {
     self->head = self->tail = self->size = 0;
     free(self->array);
