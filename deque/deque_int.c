@@ -22,9 +22,11 @@ deque deque_constructor(deque self, int size)
     return self;
 }
 
-deque deque_destructor(deque self)
+void deque_destructor(deque self)
 {
-    self->front = self->back = self->size = 0;
+    self->front = 0;
+    self->back = 0;
+    self->size = 0;
     free(self->array);
     free(self);
 }
@@ -107,10 +109,11 @@ int deque_pop_back(deque self)
         ;
 }
 
+// for debug
 void deque_print(deque self)
 {
     printf("size is %d\n", self->size);
-    for (int i = 0; i <= self->size; i++)
+    for (int i = 0; i < self->size + 1; i++)
         printf(" %d", self->array[i]);
     printf("\n");
     printf("front is %d,  back is %d\n", self->front, self->back);
