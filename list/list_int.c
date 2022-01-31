@@ -44,13 +44,13 @@ node list_assign_value(node new_node, int value)
 void list_insert_head(list self, int key)
 {
     node new_node = list_assign_value(list_make_node(), key);
-    // when list has no nodes.
+    // when list has no nodes
     if (self->head == NULL)
     {
         self->head = new_node;
         self->tail = new_node;
     }
-    // when list has nodes.
+    // when list has nodes
     else
     {
         new_node->next = self->head;
@@ -75,6 +75,11 @@ void list_insert_tail(list self, int value)
         self->tail->next = new_node;
         self->tail = new_node;
     }
+}
+
+// insert in front of iterator
+void list_insert(list self, node iterator, int value)
+{
 }
 
 int main()
