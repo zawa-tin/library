@@ -22,7 +22,7 @@ deque deque_constructor(deque self, int size)
     return self;
 }
 
-deque deque_destructor(deque self)
+void deque_destructor(deque self)
 {
     self->front = self->back = self->size = 0;
     free(self->array);
