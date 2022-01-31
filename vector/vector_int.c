@@ -9,9 +9,9 @@ struct vector_entity
 };
 typedef struct vector_entity *vector;
 
-vector construct_vector(vector self, int n)
+vector vector_construct(vector self, int n)
 {
-    self = (vector *)malloc(sizeof(vector));
+    self = (vector)malloc(sizeof(vector));
 
     int capacity = 1;
     while (capacity <= n)
@@ -24,20 +24,20 @@ vector construct_vector(vector self, int n)
     return self;
 }
 
-void destruct_vector(vector const self)
+void vector_destruct(vector const self)
 {
     free(self->vec);
     free(self);
 }
 
-void resize(vector const self, int new_size)
+void vector_resize(vector const self, int new_size)
 {
     int *new = (int *)realloc(self->vec, sizeof(int) * new_size);
     self->vec = new;
     self->capacity = new_size;
 }
 
-void insert(vector self, int value, int index)
+void vector_insert(vector self, int value, int index)
 {
     if (index >= self->capacity)
     {
@@ -45,7 +45,7 @@ void insert(vector self, int value, int index)
         while (capacity <= index)
             capacity *= 2;
 
-        resize(self, capacity);
+        vector_resize(self, capacity);
     }
 
     if (index >= self->size)
@@ -56,7 +56,7 @@ void insert(vector self, int value, int index)
     self->vec[index] = value;
 }
 
-int erase(vector const self, int index)
+int vector_erase(vector const self, int index)
 {
     if (index >= self->size)
         return 0;
@@ -80,24 +80,32 @@ int erase(vector const self, int index)
     return erased_value;
 }
 
-void push_back(vector const self, int value)
+void vector_push_back(vector const self, int value)
 {
-    insert(self, value, self->size);
+    vector_insert(self, value, self->size);
 }
 
-int pop_back(vector const self)
+int vector_pop_back(vector const self)
 {
     int poped_value;
     if (self->size > 0)
-        poped_value = erase(self, self->size - 1);
+        poped_value = vector_erase(self, self->size - 1);
     else
         return -1;
 
     return poped_value;
 }
 
+void vector_clear(vector const self)
+{
+    free(self->vec);
+    self->size = 0;
+    self->capacity = 1;
+    self->vec = (int *)malloc(sizeof(int) * self->capacity);
+}
+
 // for debug
-void print_vector(vector const self)
+void vector_print(vector const self)
 {
     for (int i = 0; i < self->size; i++)
         printf(" %d", self->vec[i]);
