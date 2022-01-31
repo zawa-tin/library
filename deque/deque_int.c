@@ -24,7 +24,9 @@ deque deque_constructor(deque self, int size)
 
 void deque_destructor(deque self)
 {
-    self->front = self->back = self->size = 0;
+    self->front = 0;
+    self->back = 0;
+    self->size = 0;
     free(self->array);
     free(self);
 }
