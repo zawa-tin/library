@@ -35,6 +35,48 @@ node list_make_node()
     return new_node;
 }
 
+node list_assign_value(node new_node, int value)
+{
+    new_node->key = value;
+    return new_node;
+}
+
+void list_insert_head(list self, int key)
+{
+    node new_node = list_assign_value(list_make_node(), key);
+    // when list has no nodes.
+    if (self->head == NULL)
+    {
+        self->head = new_node;
+        self->tail = new_node;
+    }
+    // when list has nodes.
+    else
+    {
+        new_node->next = self->head;
+        self->head->prev = new_node;
+        self->head = new_node;
+    }
+}
+
+void list_insert_tail(list self, int value)
+{
+    node new_node = list_assign_value(list_make_node(), value);
+    // when list has no nodes
+    if (self->tail == NULL)
+    {
+        self->tail = new_node;
+        self->head = new_node;
+    }
+    // when list has nodes
+    else
+    {
+        new_node->prev = self->tail;
+        self->tail->next = new_node;
+        self->tail = new_node;
+    }
+}
+
 int main()
 {
 }
