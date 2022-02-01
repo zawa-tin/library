@@ -13,12 +13,14 @@ struct list_entity
 {
     node head;
     node tail;
+    int size;
 };
 typedef struct list_entity *list;
 
 list list_constructor(list self)
 {
     self = (list)malloc(sizeof(struct list_entity));
+    self->size = 0;
     return self;
 }
 
@@ -57,6 +59,8 @@ void list_insert_head(list self, int key)
         self->head->prev = new_node;
         self->head = new_node;
     }
+
+    self->size++;
 }
 
 void list_insert_tail(list self, int value)
@@ -75,6 +79,8 @@ void list_insert_tail(list self, int value)
         self->tail->next = new_node;
         self->tail = new_node;
     }
+
+    self->size++;
 }
 
 // insert in front of iterator
@@ -96,6 +102,8 @@ void list_insert(list self, node iterator, int value)
         iterator->prev->next = new_node;
         iterator->prev = new_node;
     }
+
+    self->size++;
 }
 
 void list_delete_head(list self)
@@ -118,6 +126,8 @@ void list_delete_head(list self)
         self->head = delete_node->next;
         delete_node->next->prev = NULL;
     }
+
+    self->size--;
 
     free(delete_node);
 }
@@ -142,6 +152,8 @@ void list_delete_tail(list self)
         self->tail = delete_node->prev;
         delete_node->prev->next = NULL;
     }
+
+    self->size--;
 
     free(delete_node);
 }
@@ -170,6 +182,8 @@ void list_delete(list self, node iterator)
 
     delete_node->next->prev = delete_node->prev;
     delete_node->prev->next = delete_node->next;
+
+    self->size--;
 
     free(delete_node);
 }
