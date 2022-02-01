@@ -97,3 +97,79 @@ void list_insert(list self, node iterator, int value)
         iterator->prev = new_node;
     }
 }
+
+void list_delete_head(list self)
+{
+    // when list has not node
+    if (self->head == NULL)
+        return;
+
+    node delete_node = self->head;
+
+    // when list has only delete_node
+    if (delete_node->next == NULL)
+    {
+        self->head = NULL;
+        self->tail = NULL;
+    }
+    // when list has multiple nodes
+    else
+    {
+        self->head = delete_node->next;
+        delete_node->next->prev = NULL;
+    }
+
+    free(delete_node);
+}
+
+void list_delete_tail(list self)
+{
+    // when list has not node
+    if (self->tail == NULL)
+        return;
+
+    node delete_node = self->tail;
+
+    // when list has only delete_node
+    if (delete_node->prev == NULL)
+    {
+        self->tail = NULL;
+        self->head = NULL;
+    }
+    // when list has multiple nodes
+    else
+    {
+        self->tail = delete_node->prev;
+        delete_node->prev->next = NULL;
+    }
+
+    free(delete_node);
+}
+
+void list_delete(list self, node iterator)
+{
+    if (iterator == NULL)
+    {
+        // something wrong...
+        return;
+    }
+
+    node delete_node = iterator;
+    // when delete_node is head
+    if (delete_node->prev = NULL)
+    {
+        list_delete_head(self);
+        return;
+    }
+    // when delete_node is tail
+    else if (delete_node->next == NULL)
+    {
+        list_delete_tail(self);
+        return;
+    }
+
+    delete_node->next->prev = delete_node->prev;
+    delete_node->prev->next = delete_node->next;
+
+    free(delete_node);
+}
