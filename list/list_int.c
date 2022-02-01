@@ -62,3 +62,23 @@ void list_insert_head(list self, int value)
 
     self->size++;
 }
+
+void list_insert_tail(list self, int value)
+{
+    node new_node = list_assign_value(list_make_node(), value);
+    // when list has no nodes
+    if (self->tail == NULL)
+    {
+        self->tail = new_node;
+        self->head = new_node;
+    }
+    // when list has nodes
+    else
+    {
+        self->tail->next = new_node;
+        new_node->prev = self->tail;
+        self->tail = new_node;
+    }
+
+    self->size++;
+}
