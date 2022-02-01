@@ -97,7 +97,3 @@ void list_insert(list self, node iterator, int value)
         iterator->prev = new_node;
     }
 }
-
-int main()
-{
-}
