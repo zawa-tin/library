@@ -42,3 +42,23 @@ node list_assign_value(node new_node, int value)
     new_node->key = value;
     return new_node;
 }
+
+void list_insert_head(list self, int value)
+{
+    node new_node = list_assign_value(list_make_node(), value);
+    // when list has no nodes
+    if (self->head == NULL)
+    {
+        self->head = new_node;
+        self->tail = new_node;
+    }
+    // when list has nodes
+    else
+    {
+        self->head->prev = new_node;
+        new_node->next = self->head;
+        self->head = new_node;
+    }
+
+    self->size++;
+}
