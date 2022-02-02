@@ -104,3 +104,30 @@ void list_insert(list self, node iterator, int value)
         return;
     }
 }
+
+void list_delete_head(list self)
+{
+    // when list has no nodes
+    if (self->head == NULL)
+    {
+        // underflow!
+        return;
+    }
+
+    node delete_node = self->head;
+    // when list has only one node
+    if (delete_node->next == NULL)
+    {
+        self->head = NULL;
+        self->tail = NULL;
+    }
+    // else
+    else
+    {
+        self->head = delete_node->next;
+        delete_node->next->prev = NULL;
+    }
+
+    self->size--;
+    free(delete_node);
+}
