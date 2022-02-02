@@ -82,3 +82,25 @@ void list_insert_tail(list self, int value)
 
     self->size++;
 }
+
+// insert node in front of iterator
+void list_insert(list self, node iterator, int value)
+{
+    // when iterator is head
+    if (self->head == iterator)
+    {
+        list_insert_head(self, value);
+        return;
+    }
+    // when iterator is not head
+    else
+    {
+        node new_node = list_assign_value(list_make_node(), value);
+        new_node->next = iterator;
+        new_node->prev = iterator->prev;
+        iterator->prev->next = new_node;
+        iterator->prev = new_node;
+        self->size++;
+        return;
+    }
+}
