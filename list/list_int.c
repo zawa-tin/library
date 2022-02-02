@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct node_entity *node;
 struct node_entity
@@ -29,6 +30,11 @@ void list_destructor(list self)
     free(self->head);
     free(self->tail);
     free(self);
+}
+
+int list_get_size(list self)
+{
+    return self->size;
 }
 
 node list_make_node()
@@ -190,4 +196,26 @@ void list_delete(list self, node iterator)
     iterator->next->prev = iterator->prev;
     self->size--;
     free(iterator);
+}
+
+bool list_find(list self, int value)
+{
+    for (node check_node = self->head; check_node != NULL; check_node = check_node->next)
+    {
+        if (check_node->key == value)
+            return true;
+    }
+
+    return false;
+}
+
+int list_count(list self, int value)
+{
+    int count = 0;
+    for (node check_node = self->head; check_node != NULL; check_node = check_node->next)
+    {
+        if (check_node->key == value)
+            count++;
+    }
+    return count;
 }
