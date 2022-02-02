@@ -164,3 +164,30 @@ void list_delete_tail(list self)
     self->size--;
     free(delete_node);
 }
+
+void list_delete(list self, node iterator)
+{
+    if (iterator == NULL)
+    {
+        // exception
+        return;
+    }
+
+    // when iterator is head
+    if (iterator->prev == NULL)
+    {
+        list_delete_head(self);
+        return;
+    }
+    // when iterator is tail
+    if (iterator->next == NULL)
+    {
+        list_delete_tail(self);
+        return;
+    }
+
+    iterator->prev->next = iterator->next;
+    iterator->next->prev = iterator->prev;
+    self->size--;
+    free(iterator);
+}
