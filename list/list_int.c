@@ -86,6 +86,12 @@ void list_insert_tail(list self, int value)
 // insert node in front of iterator
 void list_insert(list self, node iterator, int value)
 {
+    if (iterator == NULL)
+    {
+        // exception
+        return;
+    }
+
     // when iterator is head
     if (self->head == iterator)
     {
@@ -126,6 +132,33 @@ void list_delete_head(list self)
     {
         self->head = delete_node->next;
         delete_node->next->prev = NULL;
+    }
+
+    self->size--;
+    free(delete_node);
+}
+
+void list_delete_tail(list self)
+{
+    // when list has no nodes
+    if (self->tail == NULL)
+    {
+        // underflow!
+        return;
+    }
+
+    node delete_node = self->tail;
+    // when list has only one node
+    if (delete_node->prev == NULL)
+    {
+        self->head = NULL;
+        self->tail = NULL;
+    }
+    // else
+    else
+    {
+        self->tail = delete_node->prev;
+        delete_node->prev->next = NULL;
     }
 
     self->size--;
