@@ -209,6 +209,7 @@ void list_clear(list self)
         search_node = search_node->next;
         free(delete_node);
     }
+    self->size = 0;
 }
 
 bool list_find(list self, int value)
