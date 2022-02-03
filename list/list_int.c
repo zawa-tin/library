@@ -233,3 +233,13 @@ int list_count(list self, int value)
     }
     return count;
 }
+
+void list_merge(list front, list back)
+{
+    front->tail->next = back->head;
+    front->tail = back->tail;
+    front->size += back->size;
+    back->head = NULL;
+    back->tail = NULL;
+    free(back);
+}
