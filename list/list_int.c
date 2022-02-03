@@ -198,6 +198,19 @@ void list_delete(list self, node iterator)
     free(iterator);
 }
 
+void list_clear(list self)
+{
+    node search_node = self->head;
+    self->head = NULL;
+    self->tail = NULL;
+    while (search_node != NULL)
+    {
+        node delete_node = search_node;
+        search_node = search_node->next;
+        free(delete_node);
+    }
+}
+
 bool list_find(list self, int value)
 {
     for (node check_node = self->head; check_node != NULL; check_node = check_node->next)
